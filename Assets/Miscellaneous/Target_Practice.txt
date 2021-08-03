@@ -1,0 +1,45 @@
+some targets need to be destroyed by bombs
+First targets are stationary
+Then they move, showing the new location with a hologram
+Then an environment you must move through to shoot at them, where there are
+turrets
+Then environment where you must dodge energy orbs from above, and at end of
+stage there is a giant one and you must move to next room to avoid
+Voiceover
+Turrets can only be destoryed by redirecting fire
+level where you are the target and you must dodge and deflect turret fire
+Blue targets shoot back projectiles
+Third target type that switches between red and blue, and if hit while blue shoots an even faster projectile.
+Large Final Boss Target. Spawns smaller targets around it that must be destroyed as it is invulnerable while they're
+around. 
+Cool Gun from beginning of game that player couldn't get is presented to them at end of boss fight. When boss is brought
+down to a certain amount of health it is "near deth" and Cool Gun descends from sky or ascends from beneath ground and given
+to player so it can be used to deal final blow. Normal gun can't finish off boss.
+Fourth Target type that creates energy shields around other targets and must be destroyed first.
+Target variant type for all types, with gold instead of white that shows that they take an extra shot to take down
+
+Can pick up smiley face targets and throw them to distract turrets 
+
+Target Tocsin that rings when things are accomplished
+
+Ledge grabbing in future version. Character presses button to grab ledge and stay on it, and can turn around and shoot from there after pressing right mouse button.
+
+Blue targets shoot back projectiles
+Third target type that switches between red and blue, and if hit while blue shoots an even faster projectile
+
+Make bullets neon orange
+
+Finish movement 
+Figure out gun and shooting 
+Figure out how to spawn and destroy base red target
+Create behavior for different target types 
+Be able to spawn different target types 
+Determine what "levels" should be and design environment in blender 
+Import it and do lighting 
+
+5th target type that rushes at you and explodes if it comes into contact with you. Has high durability so player must  switch to automatic rifle to destroy it in time. Only comes after you if you're close enough. Can be used for jump scares. Is black and red 
+
+Give bullets a chance to not disappear and instead autoaim and move towards another target 
+
+"Target Warriors" armed(gun wielding) warriors who have target shields. Which target they have show how much health they have and their behavior. For example bomb target Warriors have high health and will rush you and blow you both up if you get too close 
+At beginning of game you must choose between standard gun and cool gun floating on pedestal. If you press e and try and take cool gun two turrets come out of the wall and rev up. You'll be asked if you're REALLY sure and if yes they kill you
