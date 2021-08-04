@@ -927,13 +927,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6307943410763643888, guid: 252e8818489c8d3438886f7bfa061ff7, type: 3}
   crosshair: {fileID: 280477008}
-  shootForce: 10
+  shootForce: 125
   upwardForce: 0
   timeBetweenShooting: 0.1
-  spread: 3
+  spread: 0
   reloadTime: 1.5
   timeBetweenShots: 0
-  magazineSize: 100
+  magazineSize: 20
   bulletsPerTap: 1
   allowButtonHold: 0
   fpsCam: {fileID: 330833779}

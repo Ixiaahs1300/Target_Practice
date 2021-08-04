@@ -6,3 +6,6 @@ Refactor code
 change weapon fov to 90?
 stop bullets from rotating after shot
 make bullets dissapear after hitting surfaces
+lerp gun transition
+add black and red target prefab
+Need to add TODOs to Trello
