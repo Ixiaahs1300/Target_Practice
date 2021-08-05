@@ -429,7 +429,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59592
+  m_Name: pb_Mesh13922
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1679,7 +1679,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-60442
+  m_Name: pb_Mesh13804
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5130,7 +5130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13818
+  m_Name: pb_Mesh13848
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5709,8 +5709,8 @@ MonoBehaviour:
   wallRun: {fileID: 2022696530}
   moveSpeed: 6
   airMultiplier: 0.4
-  walkSpeed: 4
-  sprintSpeed: 6
+  walkSpeed: 6
+  sprintSpeed: 13
   acceleration: 10
   jumpForce: 15
   sprintKey: 304
@@ -5771,7 +5771,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59168
+  m_Name: pb_Mesh13888
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -15,12 +15,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airMultiplier = 0.4f;
 
     [Header("Sprinting")]
-    [SerializeField] float walkSpeed = 4f;
-    [SerializeField] float sprintSpeed = 6f;
+    [SerializeField] float walkSpeed = 6f;
+    [SerializeField] float sprintSpeed = 10f;
     [SerializeField] float acceleration = 10f;
 
+    [Header("Camera")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private float fov;
+    [SerializeField] private float wallRunFov;
+    [SerializeField] private float wallRunFovTime;
+
     [Header("Jumping")]
-    public float jumpForce = 5f;
+    public float jumpForce = 15f;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
@@ -50,12 +56,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKey(sprintKey) && isGrounded)
         {
+            
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            print("hello");
         }
-        else
+        else if(!Input.GetKey(sprintKey) && isGrounded)
         {
-            moveSpeed = Mathf.Lerp(sprintSpeed, walkSpeed, acceleration * Time.deltaTime);
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            print("hi");
         }
+
     }
 
     private bool OnSlope()
@@ -86,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         
         MyInput();
         ControlDrag();
-        //ControlSpeed();
+        ControlSpeed();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
