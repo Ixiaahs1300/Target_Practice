@@ -8,12 +8,13 @@ public class WallRun : MonoBehaviour
     [SerializeField] Transform orientation;
 
     [SerializeField] Transform playerGun;
+    float playerGunSwitchTime = 20f;
 
     [SerializeField] PlayerMovement playerMovement;
 
     Vector3 rightGunPosition;
     Vector3 leftGunPosition;
-    Vector3 gunPosition;
+    float gunPosition;
 
     [Header("Detection")]
     [SerializeField] float wallDistance = 0.5f;
@@ -69,12 +70,16 @@ public class WallRun : MonoBehaviour
         if(wallLeft)
         {
             tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
-            playerGun.localPosition = rightGunPosition;
+            //playerGun.localPosition = rightGunPosition;
+            gunPosition = Mathf.Lerp(playerGun.localPosition.x, rightGunPosition.x, playerGunSwitchTime * Time.deltaTime);
+            playerGun.localPosition = new Vector3(gunPosition, playerGun.localPosition.y, playerGun.localPosition.z);
         }
         else if(wallRight)
         {
             tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
-            playerGun.localPosition = leftGunPosition;
+            //playerGun.localPosition = leftGunPosition;
+            gunPosition = Mathf.Lerp(playerGun.localPosition.x, leftGunPosition.x, playerGunSwitchTime * Time.deltaTime);
+            playerGun.localPosition = new Vector3(gunPosition, playerGun.localPosition.y, playerGun.localPosition.z);
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -98,7 +103,9 @@ public class WallRun : MonoBehaviour
     void StopWallRun()
     {
         rb.useGravity = true;
-        playerGun.localPosition = rightGunPosition;
+        //playerGun.localPosition = rightGunPosition;
+        gunPosition = Mathf.Lerp(playerGun.localPosition.x, rightGunPosition.x, playerGunSwitchTime * Time.deltaTime);
+        playerGun.localPosition = new Vector3(gunPosition, playerGun.localPosition.y, playerGun.localPosition.z);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunFovTime * Time.deltaTime);
         tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
     }
