@@ -34,6 +34,9 @@ public class PlayerLook : MonoBehaviour
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, wallRun.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.red);
+        Debug.DrawRay(transform.position, new Vector3(0, -2.5f, 0), Color.red);
     }
 
     private void MyInput()
