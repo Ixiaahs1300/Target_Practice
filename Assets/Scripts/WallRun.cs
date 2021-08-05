@@ -39,6 +39,9 @@ public class WallRun : MonoBehaviour
     RaycastHit leftWallHit;
     RaycastHit rightWallHit;
 
+    bool stillOnWall; // problem lies in CanWallRun, if last stopwallrun is commented out,
+    // then wall running doesn't last long. Need to check if player is still on wall. aka 
+    //need to see if player can was and is still running
 
     void CheckWall()
     {
@@ -48,6 +51,7 @@ public class WallRun : MonoBehaviour
 
     bool CanWallRun()
     {
+        print(!Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight));
         return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight);
     }
 
@@ -109,26 +113,26 @@ public class WallRun : MonoBehaviour
     {
         CheckWall();
 
-        if(CanWallRun())
+        if(CanWallRun() )//&& !stillOnWall)
         {
             if(wallLeft)
             {
                 StartWallRun();
-                Debug.Log("wall running on the left");
+                //Debug.Log("wall running on the left");
             }
             else if(wallRight)
             {
                 StartWallRun();
-                Debug.Log("wall running on the right");
+                //Debug.Log("wall running on the right");
             }
             else
             {
                 StopWallRun();
             }
         }
-        /*else
+        else
         {
             StopWallRun();
-        }*/
+        }
     }
 }
