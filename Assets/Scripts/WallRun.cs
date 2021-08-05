@@ -9,6 +9,8 @@ public class WallRun : MonoBehaviour
 
     [SerializeField] Transform playerGun;
 
+    [SerializeField] PlayerMovement playerMovement;
+
     Vector3 rightGunPosition;
     Vector3 leftGunPosition;
     Vector3 gunPosition;
@@ -130,9 +132,10 @@ public class WallRun : MonoBehaviour
                 StopWallRun();
             }
         }
-        else
+        else if(!playerMovement.isSprinting)
         {
-            StopWallRun();
+            StopWallRun(); 
         }
+
     }
 }

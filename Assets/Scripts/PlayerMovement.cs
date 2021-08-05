@@ -21,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
-    [SerializeField] private float fov;
-    [SerializeField] private float wallRunFov;
-    [SerializeField] private float wallRunFovTime;
+    [SerializeField] private float fov = 90f;
+    [SerializeField] private float sprintFov = 60f;
+    [SerializeField] private float sprintFovTime = 20f;
 
     [Header("Jumping")]
     public float jumpForce = 15f;
@@ -51,19 +51,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float groundDistance = 0.2f;
 
     RaycastHit slopeHit;
+    public bool isSprinting = false;
 
     void ControlSpeed()
     {
         if(Input.GetKey(sprintKey) && isGrounded)
         {
-            
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFov, sprintFovTime * Time.deltaTime);
             print("hello");
+            isSprinting = true;
         }
-        else if(!Input.GetKey(sprintKey) && isGrounded)
+        else if(!Input.GetKey(sprintKey) && isGrounded) //maybe has to do with wallrun
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
             print("hi");
+            isSprinting = false;
         }
 
     }
