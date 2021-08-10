@@ -6408,10 +6408,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098412432}
+  - component: {fileID: 2098412433}
   m_Layer: 0
-  m_Name: BulletPoolingManager
+  m_Name: ObjectPoolingManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6423,12 +6424,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098412431}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.778437, y: 24.55353, z: -34.760868}
+  m_LocalPosition: {x: -19.973, y: 9.02, z: -6.128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098412433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098412431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bfab8e8de03364c84a83d310dd4328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6307943410763643888, guid: 252e8818489c8d3438886f7bfa061ff7,
+    type: 3}
+  bulletAmount: 20
 --- !u!1 &2115184550
 GameObject:
   m_ObjectHideFlags: 0

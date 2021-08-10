@@ -93,9 +93,22 @@ public class ProjectileGun : MonoBehaviour
         //Calculate new direction with spread
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); // Just add spread to last direction
 
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
-        currentBullet.transform.forward = directionWithSpread.normalized;
+        //GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+        //What I've found. After restarting game and beginning shooting at different locations,
+        //I've seen that shooting is normal when shooting at the exact same spot. But when you 
+        //rotate and change directions is gets messed up. 
+        //maybe try slowing down bullets and looking at transforms
 
+        //Problem seems to occur after bullets are inactivated and then used again. Seems to have to do with the state of the 
+        //bullet that's being reused with by the OPM.  n
+
+        //Thinking it has to do with rotation, but maybe to do with forward vector. Use draw ray and slow down bullets?
+        
+        GameObject currentBullet = ObjectPoolingManager.Instance.GetBullet();
+        currentBullet.transform.position = attackPoint.position;
+        //currentBullet.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        currentBullet.transform.forward = directionWithSpread.normalized;
+        print("Bullet rotation: " + currentBullet.transform.rotation);
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse); //not needed for normal bullets, moreso for boucning grenades
