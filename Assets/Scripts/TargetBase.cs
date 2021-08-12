@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetBehavior : MonoBehaviour
+public class TargetBase : MonoBehaviour
 {
 
     private void OnCollisionEnter(Collision collision)
