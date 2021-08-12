@@ -108,7 +108,6 @@ public class ProjectileGun : MonoBehaviour
         currentBullet.transform.position = attackPoint.position;
         //currentBullet.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         currentBullet.transform.forward = directionWithSpread.normalized;
-        print("Bullet rotation: " + currentBullet.transform.rotation);
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse); //not needed for normal bullets, moreso for boucning grenades
