@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     public float lifeDuration = 30f;
 
-    Rigidbody rb;
+    protected Rigidbody rb;
 
     private void Awake()
     {
@@ -20,15 +20,17 @@ public class Bullet : MonoBehaviour
         lifeTimer = lifeDuration;
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected virtual void OnCollisionEnter(Collision other)
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        print("hi");
+
         gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         lifeTimer -= Time.deltaTime;
         if(lifeTimer <= 0f)
