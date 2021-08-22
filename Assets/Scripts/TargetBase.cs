@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class TargetBase : MonoBehaviour
 {
-    public int health; //TODO
-    public int spawnIndex;
-    public TargetSpawner spawner;
+    [SerializeField] private int health; //TODO
+    [SerializeField] public int spawnIndex;
+    [SerializeField] public TargetSpawner spawner;
 
     private void OnCollisionEnter(Collision collision)
     {
         print("collide: " + collision.gameObject.name);
         if (collision.gameObject.name.Contains("bullet"))
         {
-            spawner.positions.Remove(transform.position);
+            if (spawner != null)
+            {
+                spawner.positions.Remove(transform.position);
+            }
             Destroy(gameObject);
         }
     }

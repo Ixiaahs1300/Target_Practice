@@ -61,9 +61,8 @@ public class TargetSpawner : MonoBehaviour
 
     private IEnumerator InstantiateRandomObjects()
     {
-        //need to parent targets to spawner
-        var target = Instantiate(targetBase, randomPosition, Quaternion.Euler(0f, 0f, 90f));
-        //target.transform.SetParent(transform);
+        var target = Instantiate(RollTarget(), randomPosition, Quaternion.Euler(0f, 0f, 90f));
+        target.transform.SetParent(transform);
         target.GetComponent<TargetBase>().spawnIndex = positions.Count + 1;
         target.GetComponent<TargetBase>().spawner = this;
         positions.Add(randomPosition);
@@ -78,6 +77,55 @@ public class TargetSpawner : MonoBehaviour
         xAxis = Random.Range(min.x, max.x);
         yAxis = Random.Range(min.y, max.y);
         zAxis = Random.Range(min.z, max.z);
+    }
+
+    GameObject RollTarget()
+    {
+        float targetChoice = Random.value;
+        float percentagePointer = 0f;
+        print("Target percent: " + targetChoice);
+
+        percentagePointer += percentBase / 100f;
+
+        if(targetChoice <= percentagePointer)
+        {
+            print("Type chosen is: Base");
+            return targetBase;
+        }
+
+        percentagePointer += percentProjectile / 100f;
+
+        if (targetChoice <= percentagePointer)
+        {
+            print("Type chosen is: Projectile");
+            return targetProjectile;
+        }
+
+        percentagePointer += percentBlink / 100f;
+
+        if (targetChoice <= percentagePointer)
+        {
+            print("Type chosen is: Blink");
+            return targetBlink;
+        }
+
+        percentagePointer += percentShield / 100f;
+
+        if (targetChoice <= percentagePointer)
+        {
+            print("Type chosen is: Shield");
+            return targetShield;
+        }
+
+        percentagePointer += percentPursue / 100f;
+
+        if (targetChoice <= percentagePointer)
+        {
+            print("Type chosen is: Pursue");
+            return targetPursue;
+        }
+
+        return null;
     }
 
     bool TargetsIntersect(float xAxis, float yAxis, float zAxis, Vector3 pos)
