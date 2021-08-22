@@ -17,8 +17,8 @@ public class TargetSpawner : MonoBehaviour
     private GameObject chosenType;
 
     [Header("Positioning")]
-    [SerializeField] float sizeX;
-    [SerializeField] float sizeY;
+    [SerializeField] BoxCollider col;
+    private Vector3 center;
     public List<Vector3> positions;
     private Vector3 min;
     private Vector3 max;
@@ -48,20 +48,22 @@ public class TargetSpawner : MonoBehaviour
 
     void Awake()
     {
+        center = col.center + transform.position;
         SetRanges();
     }
 
     private void SetRanges()
     {
         //Need to be updated so that it can be used with variable depth as well
-        min = new Vector3(transform.position.x - sizeX + 1, transform.position.y - sizeY + 1, transform.position.z);
-        max = new Vector3(transform.position.x - 1, transform.position.y - 1, transform.position.z);
+        min = new Vector3(center.x - col.size.x / 2f + 1, center.y - col.size.y / 2f + 1, transform.position.z);
+        max = new Vector3(center.x + col.size.x / 2f - 1, center.y + col.size.y / 2f - 1, transform.position.z);
     }
 
     private IEnumerator InstantiateRandomObjects()
     {
-        print("we instantiating");
+        //need to parent targets to spawner
         var target = Instantiate(targetBase, randomPosition, Quaternion.Euler(0f, 0f, 90f));
+        //target.transform.SetParent(transform);
         target.GetComponent<TargetBase>().spawnIndex = positions.Count + 1;
         target.GetComponent<TargetBase>().spawner = this;
         positions.Add(randomPosition);

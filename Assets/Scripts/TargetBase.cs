@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetBase : MonoBehaviour
 {
+    public int health; //TODO
     public int spawnIndex;
     public TargetSpawner spawner;
 
