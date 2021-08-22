@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7695521424955888849}
   - component: {fileID: 1698135551794245351}
   - component: {fileID: 4948457783271068190}
-  - component: {fileID: 6292485749291631263}
   - component: {fileID: 2490281603925877231}
+  - component: {fileID: -2233646473090435523}
   m_Layer: 0
   m_Name: target_pursue_bomb
   m_TagString: Untagged
@@ -81,18 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6292485749291631263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670009368474396354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820f52490028baf448b063f0af0c954e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &2490281603925877231
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -107,3 +95,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -2124705421725058983, guid: 8d1892a90205ba54ea0410ebb015d38a, type: 3}
+--- !u!114 &-2233646473090435523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670009368474396354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf59bd9ad473a954abe22b20299c25c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  spawnIndex: 0
+  spawner: {fileID: 0}

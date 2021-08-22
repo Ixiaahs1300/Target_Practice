@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7986664570175763513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7986664570175763512}
+  - component: {fileID: 7986664570175763511}
+  - component: {fileID: 7986664570175763510}
+  m_Layer: 0
+  m_Name: TargetSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7986664570175763512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986664570175763513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9, y: 8, z: -72.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7986664570175763511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986664570175763513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22665ee9c7cb384e90833ad81a9725b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetBase: {fileID: 6670009368474396354, guid: dbaa8f525ad7116488c5537766af51d8,
+    type: 3}
+  targetBase_v2: {fileID: 6670009368474396354, guid: 24059a08ff906c74cbc44e7f7aa55329,
+    type: 3}
+  targetProjectile: {fileID: 6670009368474396354, guid: de122ad504637a24791d51ba81c2e7e9,
+    type: 3}
+  targetProjectile_v2: {fileID: 6670009368474396354, guid: 927fd3094ca2971439be925d86203e99,
+    type: 3}
+  targetBlink: {fileID: 6670009368474396354, guid: 34c9428ebc49f1649ab72776ebdc5a28,
+    type: 3}
+  targetBlink_v2: {fileID: 6670009368474396354, guid: 6cbe3977c87f0024998ea44edca27a28,
+    type: 3}
+  targetShield: {fileID: 6670009368474396354, guid: b75b2f2bacd828649b22a03ec77aae7b,
+    type: 3}
+  targetShield_v2: {fileID: 6670009368474396354, guid: 3794039f2b6fdff43a04c73cb9a445cf,
+    type: 3}
+  targetPursue: {fileID: 6670009368474396354, guid: 356d7f6f11d7cc94d8c21df4f39e8f86,
+    type: 3}
+  col: {fileID: 7986664570175763510}
+  positions: []
+  percentBase: 20
+  percentProjectile: 20
+  percentBlink: 20
+  percentShield: 20
+  percentPursue: 20
+  trigger: {fileID: 0}
+--- !u!65 &7986664570175763510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986664570175763513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 18, y: 8, z: 1}
+  m_Center: {x: -9, y: -4, z: 0}
