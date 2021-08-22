@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1698135551794245351}
   - component: {fileID: 4948457783271068190}
   - component: {fileID: 2973015106459712266}
+  - component: {fileID: 2294928139997587099}
   m_Layer: 0
   m_Name: target_blink
   m_TagString: Untagged
@@ -92,6 +93,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4420734fcb571a4597b7e6963838762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  spawnIndex: 0
+  spawner: {fileID: 0}
   red: {fileID: -382652638819485698, guid: 8d1892a90205ba54ea0410ebb015d38a, type: 3}
   blue: {fileID: 2100000, guid: c07aa9e33021d8444b42f553adf5bbbb, type: 2}
   switchTime: 3
+--- !u!64 &2294928139997587099
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670009368474396354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -2124705421725058983, guid: 8d1892a90205ba54ea0410ebb015d38a, type: 3}
