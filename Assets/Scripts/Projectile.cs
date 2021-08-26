@@ -8,9 +8,13 @@ public class Projectile : Bullet
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        print("hi");
-
-        Destroy(gameObject);
+        
+        if(other.gameObject.layer != 9)
+        {
+            Destroy(gameObject);
+        }
+        
+        
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ public class TargetBase : MonoBehaviour
     [SerializeField] public int spawnIndex;
     [SerializeField] public TargetSpawner spawner;
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         print("collide: " + collision.gameObject.name);
         if (collision.gameObject.name.Contains("bullet"))

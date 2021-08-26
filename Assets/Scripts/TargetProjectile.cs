@@ -20,6 +20,15 @@ public class TargetProjectile : TargetBase
         StartCoroutine(ShootPlayer()); ;
     }
 
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if(collision.transform.CompareTag("Projectile"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     IEnumerator ShootPlayer()
     {
         while (true) { 

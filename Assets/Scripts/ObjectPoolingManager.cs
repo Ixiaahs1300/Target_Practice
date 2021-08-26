@@ -12,8 +12,12 @@ public class ObjectPoolingManager : MonoBehaviour
 
     public GameObject bulletPrefab;
     public int bulletAmount = 20;
-    
+
+    public GameObject projectilePrefab;
+    public int projectileAmount = 10;
+
     private List<GameObject> bullets;
+    private List<GameObject> projectiles;
 
     private void Awake()
     {
@@ -21,6 +25,7 @@ public class ObjectPoolingManager : MonoBehaviour
 
         //Preload bullets
         bullets = new List<GameObject>(bulletAmount);
+        projectiles = new List<GameObject>(projectileAmount);
 
         for(int i = 0; i < bulletAmount; i++)
         {
@@ -30,6 +35,16 @@ public class ObjectPoolingManager : MonoBehaviour
 
             bullets.Add(prefabInstance);
         }
+
+        foreach (GameObject proj in projectiles)
+        {
+            GameObject prefabInstance = Instantiate(projectilePrefab);
+            prefabInstance.transform.SetParent(transform);
+            prefabInstance.SetActive(false);
+
+            projectiles.Add(prefabInstance);
+        }
+
     }
 
     public GameObject GetBullet()
@@ -49,6 +64,27 @@ public class ObjectPoolingManager : MonoBehaviour
         prefabInstance.transform.SetParent(transform);
 
         bullets.Add(prefabInstance);
+
+        return prefabInstance;
+    }
+
+    public GameObject GetProjectile()
+    {
+        foreach (GameObject proj in projectiles)
+        {
+            if (!proj.activeInHierarchy)
+            {
+                proj.SetActive(true);
+                //bullet.transform.localRotation = Quaternion.identity;
+                //print("hi");
+                return proj;
+            }
+        }
+
+        GameObject prefabInstance = Instantiate(projectilePrefab);
+        prefabInstance.transform.SetParent(transform);
+
+        projectiles.Add(prefabInstance);
 
         return prefabInstance;
     }
