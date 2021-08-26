@@ -32,7 +32,8 @@ public class TargetProjectile : TargetBase
     IEnumerator ShootPlayer()
     {
         while (true) { 
-        GameObject orb = Instantiate(projectile);
+        //GameObject orb = Instantiate(projectile);
+        GameObject orb = ObjectPoolingManager.Instance.GetProjectile();
         orb.transform.position = transform.position + transform.forward;
         orb.transform.LookAt(player);
         orb.GetComponent<Rigidbody>().AddForce((player.position - orb.transform.position).normalized * shootForce, ForceMode.Impulse);
