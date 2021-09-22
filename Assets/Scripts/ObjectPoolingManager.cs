@@ -36,7 +36,7 @@ public class ObjectPoolingManager : MonoBehaviour
             bullets.Add(prefabInstance);
         }
 
-        for (int i = 0; i < projectileAmount; i++)
+        foreach (GameObject proj in projectiles)
         {
             GameObject prefabInstance = Instantiate(projectilePrefab);
             prefabInstance.transform.SetParent(transform);
