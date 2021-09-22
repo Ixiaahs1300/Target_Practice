@@ -10,7 +10,6 @@ public class TargetBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        print("collide: " + collision.gameObject.name);
         if (collision.gameObject.name.Contains("bullet"))
         {
             if (spawner != null)
