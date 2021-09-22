@@ -41,6 +41,8 @@ public class WallRun : MonoBehaviour
     RaycastHit leftWallHit;
     RaycastHit rightWallHit;
 
+    [SerializeField] LedgeDetection ld;
+
     bool stillOnWall; // problem lies in CanWallRun, if last stopwallrun is commented out,
     // then wall running doesn't last long. Need to check if player is still on wall. aka 
     //need to see if player can was and is still running
@@ -115,7 +117,7 @@ public class WallRun : MonoBehaviour
     {
         CheckWall();
 
-        if(CanWallRun() )//&& !stillOnWall)
+        if(CanWallRun() && !ld.isHanging)//&& !stillOnWall)
         {
             if(wallLeft)
             {

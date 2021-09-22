@@ -20,7 +20,7 @@ public class LedgeGrab : MonoBehaviour
     void CheckWall()
     {
         wallInFront = Physics.Raycast(transform.position - new Vector3(0, 0.2f, 0), orientation.forward, out frontWallHit, wallDistance);
-        Debug.DrawRay(transform.position, orientation.forward, Color.blue);
+        //Debug.DrawRay(transform.position, orientation.forward, Color.blue);
         //Maybe instead of raycast it uses a PHysics.checkbox to see if it is above other collider
     }
 
