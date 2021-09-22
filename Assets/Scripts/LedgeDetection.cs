@@ -9,7 +9,6 @@ public class LedgeDetection : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerMovement pm;
-    [SerializeField] private Transform camHolder;
     private RaycastHit ledgeHorizontal;
     private RaycastHit ledgeVertical;
     [SerializeField] private float horizontalWallDistance = 0.6f;
@@ -17,8 +16,6 @@ public class LedgeDetection : MonoBehaviour
     [SerializeField] private bool horizontalHit = false;
     [SerializeField] private bool verticalHit = false;
     public bool isHanging = false;
-    private Vector3 hangPosition = Vector3.zero;
-    private Vector3 camPosition = Vector3.zero;
     private KeyCode ledgeClimbKey = KeyCode.Space;
     public float jumpForce = 15f;
     private bool isJumping = false;
@@ -46,8 +43,6 @@ public class LedgeDetection : MonoBehaviour
     {
         if(CanHang())
         {
-            print("eyyy");
-
             isHanging = true;
             rb.isKinematic = true;
         }
@@ -55,9 +50,6 @@ public class LedgeDetection : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(detectHorizontal.position, orientation.forward, Color.blue);
-        //Debug.DrawRay(detectVertical.position, new Vector3(0, -1.2f, 0), Color.green);
-
         if (!isHanging)
         {
             LedgeAhead();
