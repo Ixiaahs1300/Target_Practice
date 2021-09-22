@@ -9,6 +9,7 @@ public class TargetBlink : TargetBase
     [SerializeField] Material blue;
     Material currentMat;
     [SerializeField] float switchTime = 3f;
+    [SerializeField] float repeatTime = 3f;
 
     void Awake()
     {
@@ -18,18 +19,23 @@ public class TargetBlink : TargetBase
 
     private void Start()
     {
-        InvokeRepeating("ChangeType", switchTime, switchTime);
+        InvokeRepeating("ChangeType", switchTime, repeatTime);
     }
 
     void ChangeType()
     {
+        print("is called");
         if (currentMat.Equals(blue))
         {
-            mr.materials[0] = red;
+            mr.material = red;
+            currentMat = red;
+            print("red");
         }
         else if(currentMat.Equals(red))
         {
-            mr.materials[0] = blue;
+            mr.material = blue;
+            currentMat = blue;
+            print("blue");
         }
     }
 
@@ -37,13 +43,5 @@ public class TargetBlink : TargetBase
     void Update()
     {
 
-        /*if(currentMat.Equals(red))
-        {
-
-        }
-        else if(currentMat.Equals(blue))
-        {
-
-        }*/
     }
 }
