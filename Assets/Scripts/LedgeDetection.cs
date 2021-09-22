@@ -9,7 +9,7 @@ public class LedgeDetection : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerMovement pm;
-    [SerializeField] private GameObject camHolder;
+    [SerializeField] private Transform camHolder;
     private RaycastHit ledgeHorizontal;
     private RaycastHit ledgeVertical;
     [SerializeField] private float horizontalWallDistance = 0.6f;
@@ -21,6 +21,7 @@ public class LedgeDetection : MonoBehaviour
     private Vector3 camPosition = Vector3.zero;
     private KeyCode ledgeClimbKey = KeyCode.Space;
     public float jumpForce = 15f;
+    private bool isJumping = false;
 
 
     bool CanHang()
@@ -46,11 +47,9 @@ public class LedgeDetection : MonoBehaviour
         if(CanHang())
         {
             print("eyyy");
-            rb.velocity = Vector3.zero;
-            rb.useGravity = false;
+
             isHanging = true;
-            hangPosition = transform.position;
-            camPosition = camHolder.transform.position;
+            rb.isKinematic = true;
         }
     }
 
@@ -64,23 +63,22 @@ public class LedgeDetection : MonoBehaviour
             LedgeAhead();
             Hang();
         }
-        else
-        {
-            transform.position = hangPosition;
-            camPosition = camHolder.transform.position;
-        }
 
-        /*if (Input.GetKeyDown(ledgeClimbKey))
+        if (Input.GetKeyDown(ledgeClimbKey) && isHanging)
         {
-            rb.useGravity = true;
-            isHanging = false;
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        }*/
+            isJumping = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        
+        if (isJumping && isHanging)
+        {
+            rb.isKinematic = false;
+            isHanging = false;
+            isJumping = false;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
     }
 }

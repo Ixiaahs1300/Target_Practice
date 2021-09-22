@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+        print(transform.position);
     }
 
     void Jump()
