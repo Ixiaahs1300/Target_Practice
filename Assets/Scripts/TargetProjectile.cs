@@ -31,14 +31,15 @@ public class TargetProjectile : TargetBase
 
     IEnumerator ShootPlayer()
     {
-        while (true) { 
+        while (true) 
+        { 
         GameObject orb = Instantiate(projectile);
         orb.transform.position = transform.position + transform.forward;
         orb.transform.LookAt(player);
         orb.GetComponent<Rigidbody>().AddForce((player.position - orb.transform.position).normalized * shootForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(timeBetweenShots);
-}
+        }
     }
 
     // Update is called once per frame

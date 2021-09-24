@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &193485785888592862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990923107421421539}
+  m_Layer: 0
+  m_Name: LedgeDetectionHorizontal
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1990923107421421539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193485785888592862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2261929508708998799}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2140094612442434559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9075159402921192914}
+  m_Layer: 0
+  m_Name: LedgeDetectionVertical
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9075159402921192914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140094612442434559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2261929508708998799}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2261929507019133305
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +226,7 @@ GameObject:
   - component: {fileID: 2261929508634707113}
   - component: {fileID: 2261929508634707112}
   - component: {fileID: 2261929508634707115}
+  - component: {fileID: 1640634519900478633}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -278,13 +339,37 @@ MonoBehaviour:
   wallRunGravity: 1
   wallRunJumpForce: 4
   cam: {fileID: 0}
-  fov: 90
+  fov: 80
   wallRunFov: 110
   wallRunFovTime: 20
   camTilt: 20
   camTiltTime: 20
   wallLeft: 0
   wallRight: 0
+  ld: {fileID: 1640634519900478633}
+--- !u!114 &1640634519900478633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261929508634707124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9d40313ccdc4e4a8ca73509a573e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectVertical: {fileID: 9075159402921192914}
+  detectHorizontal: {fileID: 1990923107421421539}
+  orientation: {fileID: 2261929508708998799}
+  rb: {fileID: 2261929508634707127}
+  pm: {fileID: 2261929508634707113}
+  horizontalWallDistance: 0.6
+  verticalWallDistance: 1.2
+  horizontalHit: 0
+  verticalHit: 0
+  isHanging: 0
+  jumpForce: 15
 --- !u!1 &2261929508708998796
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +396,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1990923107421421539}
+  - {fileID: 9075159402921192914}
   m_Father: {fileID: 2261929508634707126}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

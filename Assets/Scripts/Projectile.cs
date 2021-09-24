@@ -6,11 +6,13 @@ public class Projectile : Bullet
 {
     protected override void OnCollisionEnter(Collision other)
     {
+        int layer = other.gameObject.layer;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        if(other.gameObject.layer != 9)
+        if(layer != 9)
         {
+            print("Should be destroyed");
             Destroy(gameObject);
         }
         

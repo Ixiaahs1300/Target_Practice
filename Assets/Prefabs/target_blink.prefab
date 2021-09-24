@@ -99,6 +99,11 @@ MonoBehaviour:
   red: {fileID: -382652638819485698, guid: 8d1892a90205ba54ea0410ebb015d38a, type: 3}
   blue: {fileID: 2100000, guid: c07aa9e33021d8444b42f553adf5bbbb, type: 2}
   switchTime: 3
+  repeatTime: 3
+  projectile: {fileID: 4891144997965232452, guid: 7f70bca6c1e189f4cb869796f5175307,
+    type: 3}
+  player: {fileID: 0}
+  shootForce: 60
 --- !u!64 &2294928139997587099
 MeshCollider:
   m_ObjectHideFlags: 0
