@@ -82,6 +82,7 @@ public class TargetSpawner : MonoBehaviour
     GameObject RollTarget()
     {
         float targetChoice = Random.value;
+
         float percentagePointer = 0f;
         print("Target percent: " + targetChoice);
 
@@ -111,7 +112,7 @@ public class TargetSpawner : MonoBehaviour
 
         percentagePointer += percentShield / 100f;
 
-        if (targetChoice <= percentagePointer)
+        if (targetChoice <= percentagePointer && positions.Count <= 2)
         {
             print("Type chosen is: Shield");
             return targetShield;

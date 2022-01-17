@@ -119,11 +119,12 @@ public class WallRun : MonoBehaviour
         leftGunPosition = new Vector3(-0.52f, rightGunPosition.y, rightGunPosition.z);
     }
 
+    //Need to check if moving forward
     // Update is called once per frame
     void Update()
     {
         CheckWall();
-
+        print("Vel: " + rb.velocity);
         if(CanWallRun() && !ld.isHanging)//&& !stillOnWall)
         {
             if(wallLeft)

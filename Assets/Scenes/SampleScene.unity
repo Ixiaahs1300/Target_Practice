@@ -234,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 6670009368474396354, guid: 34c9428ebc49f1649ab72776ebdc5a28,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695521424955888849, guid: 34c9428ebc49f1649ab72776ebdc5a28,
         type: 3}
@@ -2382,7 +2382,7 @@ PrefabInstance:
     - target: {fileID: 6670009368474396354, guid: 34c9428ebc49f1649ab72776ebdc5a28,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695521424955888849, guid: 34c9428ebc49f1649ab72776ebdc5a28,
         type: 3}
@@ -3598,10 +3598,10 @@ MonoBehaviour:
     type: 3}
   col: {fileID: 955998201}
   positions: []
-  percentBase: 0
-  percentProjectile: 100
+  percentBase: 50
+  percentProjectile: 0
   percentBlink: 0
-  percentShield: 0
+  percentShield: 50
   percentPursue: 0
   trigger: {fileID: 144309063}
 --- !u!65 &955998201
@@ -5549,7 +5549,7 @@ PrefabInstance:
     - target: {fileID: 7695521424955888849, guid: 3794039f2b6fdff43a04c73cb9a445cf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.956898
+      value: -29.43
       objectReference: {fileID: 0}
     - target: {fileID: 7695521424955888849, guid: 3794039f2b6fdff43a04c73cb9a445cf,
         type: 3}
