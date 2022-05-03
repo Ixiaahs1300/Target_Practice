@@ -144,17 +144,18 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        if(isGrounded && !OnSlope())
+        if (isGrounded && !OnSlope())
         {
             rb.useGravity = true;
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
-        else if(isGrounded && OnSlope())
+        else if (isGrounded && OnSlope())
         {
             rb.useGravity = false; //Stops sliding
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
-        else if ((!isGrounded && wallRun.wallLeft) || (!isGrounded && wallRun.wallRight))
+        //else if ((!isGrounded && wallRun.wallLeft) || (!isGrounded && wallRun.wallRight))
+        else if (!isGrounded && wallRun.isWallAdjacent())
         {
             rb.AddForce(moveDirection.normalized * (moveSpeed / 2) * movementMultiplier * airMultiplier, ForceMode.Acceleration);
         }

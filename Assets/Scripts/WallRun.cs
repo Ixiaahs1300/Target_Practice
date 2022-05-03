@@ -36,8 +36,13 @@ public class WallRun : MonoBehaviour
 
     private Rigidbody rb;
 
-    public bool wallLeft = false;
-    public bool wallRight = false;
+    [SerializeField]
+    private bool wallLeft = false;
+    [SerializeField]
+    private bool wallRight = false;
+    [SerializeField]
+    private bool isWallRunning = false;
+
 
     RaycastHit leftWallHit;
     RaycastHit rightWallHit;
@@ -66,11 +71,12 @@ public class WallRun : MonoBehaviour
         rb.useGravity = false;
 
         rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
-
+        
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, wallRunFovTime * Time.deltaTime);
 
         if(wallLeft)
         {
+            isWallRunning = true;
             tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
             //playerGun.localPosition = rightGunPosition;
             gunPosition = Mathf.Lerp(playerGun.localPosition.x, rightGunPosition.x, playerGunSwitchTime * Time.deltaTime);
@@ -78,6 +84,7 @@ public class WallRun : MonoBehaviour
         }
         else if(wallRight)
         {
+            isWallRunning = true;
             tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
             //playerGun.localPosition = leftGunPosition;
             gunPosition = Mathf.Lerp(playerGun.localPosition.x, leftGunPosition.x, playerGunSwitchTime * Time.deltaTime);
@@ -102,6 +109,16 @@ public class WallRun : MonoBehaviour
         }
     }
 
+    public bool getWallRunning()
+    {
+        return isWallRunning;
+    }
+
+    public bool isWallAdjacent()
+    {
+        return wallLeft || wallRight;
+    }
+
     void StopWallRun()
     {
         rb.useGravity = true;
@@ -109,6 +126,7 @@ public class WallRun : MonoBehaviour
         gunPosition = Mathf.Lerp(playerGun.localPosition.x, rightGunPosition.x, playerGunSwitchTime * Time.deltaTime);
         playerGun.localPosition = new Vector3(gunPosition, playerGun.localPosition.y, playerGun.localPosition.z);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunFovTime * Time.deltaTime);
+        isWallRunning = false;
         tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
     }
 
@@ -124,8 +142,8 @@ public class WallRun : MonoBehaviour
     void Update()
     {
         CheckWall();
-        print("Vel: " + rb.velocity);
-        if(CanWallRun() && !ld.isHanging)//&& !stillOnWall)
+        print("Vel: " + rb.velocity.z);
+        if(CanWallRun() && !ld.isHanging && (rb.velocity.z != 0 || isWallRunning))//&& !stillOnWall)
         {
             if(wallLeft)
             {
