@@ -8,6 +8,7 @@ public class TargetTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Begins instantiating targets when player enters trigger area
         if (other.tag.Equals("Player"))
         {
             canInstantiate = true;
@@ -16,6 +17,7 @@ public class TargetTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // Stops instantiating targets when player exits trigger area
         if (other.tag.Equals("Player"))
         {
             canInstantiate = false;
