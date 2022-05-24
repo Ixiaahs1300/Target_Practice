@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFov, sprintFovTime * Time.deltaTime);
             isSprinting = true;
         }
-        else if(!Input.GetKey(sprintKey) && isGrounded) //maybe has to do with wallrun
+        else if(!Input.GetKey(sprintKey) && isGrounded) //maybe has to do with wallrun, what happens when the player is in the air / isn't grounded, is the sprint bool properly updated?
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
