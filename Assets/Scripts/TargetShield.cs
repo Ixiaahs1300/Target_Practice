@@ -29,33 +29,46 @@ public class TargetShield : TargetBase
     void Start()
     {
         StartCoroutine("Shield");
+        print(spawnIndex);
     }
-    //Make it in TargetSpawner so that shield can't be first or second spawned target
+    
+    public int RandomExcept(int min, int max, int except)
+    {
+        int random = Random.Range(min, max);
+        if (random >= except) random = (random + 1) % max;
+        return random;
+    }
+
     IEnumerator Shield()
     {
-        int guardTarget = 0;
-        if (spawner != null && spawner.positions.Count < 2)
+        while (true)
         {
-            guardTarget = Random.Range(0, spawner.positions.Count);
-        }
-        //else if(shielding != )
-
-        else
-        {
-            yield return new WaitForSeconds(3f);
-        }
-        //print(Random.Range(0, 0));
-        if(guardTarget == spawnIndex)
-        {
-            while(guardTarget == spawnIndex)
+            int guardTarget = 0;
+            if (spawner != null && spawner.positions.Count > 1)
             {
+                Debug.Log("Count: " + spawner.positions.Count);
                 guardTarget = Random.Range(0, spawner.positions.Count);
             }
-        }
-        shieldInstance.transform.position = spawner.positions[guardTarget];
-        shieldInstance.SetActive(true);
+            //else if(shielding != )
+            else
+            {
+                yield return new WaitForSeconds(3f);
+                print("We ON!");
+            }
+            //print(Random.Range(0, 0));
+            if (guardTarget == spawnIndex)
+            {
+                while (guardTarget == spawnIndex)
+                {
+                    guardTarget = Random.Range(0, spawner.positions.Count);
+                }
+            }
 
-        yield return new WaitForSeconds(3f);
+            shieldInstance.transform.position = spawner.positions[guardTarget];
+            shieldInstance.SetActive(true);
+
+            yield return new WaitForSeconds(3f);
+        }
     }
 
     // Update is called once per frame

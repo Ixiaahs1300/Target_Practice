@@ -144,21 +144,27 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+        // Player is simply moving on the ground
         if (isGrounded && !OnSlope())
         {
             rb.useGravity = true;
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
+        // Player is moving up slope
         else if (isGrounded && OnSlope())
         {
             rb.useGravity = false; //Stops sliding
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
         //else if ((!isGrounded && wallRun.wallLeft) || (!isGrounded && wallRun.wallRight))
+        // Player is wall running
         else if (!isGrounded && wallRun.isWallAdjacent())
         {
+            // get rid of vector in up direction
             rb.AddForce(moveDirection.normalized * (moveSpeed / 2) * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+            print("Vector: " + moveDirection.normalized);
         }
+        // If the player is jumping through the air
         else if (!isGrounded)
         {
             rb.useGravity = true;

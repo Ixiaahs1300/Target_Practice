@@ -12,7 +12,7 @@ public class Projectile : Bullet
         
         if(layer != 9)
         {
-            print("Should be destroyed");
+            //print("Should be destroyed");
             Destroy(gameObject);
         }
         

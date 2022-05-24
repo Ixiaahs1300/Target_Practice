@@ -142,7 +142,7 @@ public class WallRun : MonoBehaviour
     void Update()
     {
         CheckWall();
-        print("Vel: " + rb.velocity.z);
+        //print("Vel: " + rb.velocity.z);
         if(CanWallRun() && !ld.isHanging && (rb.velocity.z != 0 || isWallRunning))//&& !stillOnWall)
         {
             if(wallLeft)
