@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LedgeDetection : MonoBehaviour
 {
+    // Looks for ledge in grabbing distance above player
     [SerializeField] private Transform detectVertical;
+    // looks to see if there is a wall in front of the player
     [SerializeField] private Transform detectHorizontal;
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
@@ -13,14 +15,17 @@ public class LedgeDetection : MonoBehaviour
     private RaycastHit ledgeVertical;
     [SerializeField] private float horizontalWallDistance = 0.6f;
     [SerializeField] private float verticalWallDistance = 1.2f;
+    // Whether a raycast is detecting a wall in front
     [SerializeField] private bool horizontalHit = false;
+    // Whether a raycast is detecting a grabbable ledge above
     [SerializeField] private bool verticalHit = false;
     public bool isHanging = false;
+    // Key for jumping onto ledge
     private KeyCode ledgeClimbKey = KeyCode.Space;
     public float jumpForce = 15f;
     private bool isJumping = false;
 
-
+    // Allows you to hang if the player is falling in front of a ledge
     bool CanHang()
     {
         if(!pm.isGrounded && LedgeAhead() && rb.velocity.y < 0) 
@@ -32,6 +37,7 @@ public class LedgeDetection : MonoBehaviour
 
     }
     
+    // Detects if a grabbable ledge is ahead 
     bool LedgeAhead()
     {
         horizontalHit = Physics.Raycast(transform.position, orientation.forward, out ledgeHorizontal, horizontalWallDistance);
@@ -41,6 +47,7 @@ public class LedgeDetection : MonoBehaviour
 
     void Hang()
     {
+        // Turns off physics while character hangs to stop jittering
         if(CanHang())
         {
             isHanging = true;
@@ -64,6 +71,7 @@ public class LedgeDetection : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Allows player to jump up onto ledge
         if (isJumping && isHanging)
         {
             rb.isKinematic = false;
