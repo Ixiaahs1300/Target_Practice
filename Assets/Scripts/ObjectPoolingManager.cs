@@ -6,8 +6,10 @@ public class ObjectPoolingManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    // Singleton instance of OPM
     public static ObjectPoolingManager instance;
 
+    // Singleton getter method of instance
     public static ObjectPoolingManager Instance { get { return instance; } }
 
     public GameObject bulletPrefab;
