@@ -160,7 +160,7 @@ public class WallRun : MonoBehaviour
                 StopWallRun();
             }
         }
-        else if(!playerMovement.isSprinting)
+        else 
         {
             StopWallRun(); 
         }

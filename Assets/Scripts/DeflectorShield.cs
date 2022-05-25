@@ -15,16 +15,16 @@ public class DeflectorShield : MonoBehaviour
     private Vector3 shieldGrowVelocity = new Vector3(0f, 0f, 0f);
     private bool isShieldShrinking;
     // Force at which projectiles are deflected back
-    [SerializeField] private float deflectForce = 30f;
+    [SerializeField] private float deflectForce = 0f;
     Vector3 relVel;
 
     // Start is called before the first frame update
     void Awake()
     {
-        isShieldShrinking = false;
+        isShieldShrinking = true;
     }
     
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collision other)
     {
         // Deflects projectile in direction opposite of where it came
         if (shield.activeInHierarchy && other.gameObject.tag.Equals("Projectile"))
@@ -72,8 +72,6 @@ public class DeflectorShield : MonoBehaviour
         }
         
     }
-
-    // testing new branch
 
     IEnumerator GrowShield()
     {
