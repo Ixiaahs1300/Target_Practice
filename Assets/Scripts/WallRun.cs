@@ -62,7 +62,7 @@ public class WallRun : MonoBehaviour
     bool CanWallRun()
     {
         //print(!Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight));
-        return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight);
+        return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight) && playerMovement.isSprinting;
     }
 
 
@@ -160,7 +160,7 @@ public class WallRun : MonoBehaviour
                 StopWallRun();
             }
         }
-        else 
+        else
         {
             StopWallRun(); 
         }
