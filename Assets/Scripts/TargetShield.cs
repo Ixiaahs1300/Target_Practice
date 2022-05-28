@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TargetShield : TargetBase
 {
+    // energy shield prefab
     [SerializeField] private GameObject shield;
+    // Instance of energy shield prefab
     private GameObject shieldInstance;
-    //private bool shi elding = false;
 
     // Start is called before the first frame update
     private void Awake()
@@ -18,7 +19,6 @@ public class TargetShield : TargetBase
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        Destroy(shieldInstance);
         base.OnCollisionEnter(collision);
         if (collision.transform.CompareTag("Projectile"))
         {
@@ -32,6 +32,10 @@ public class TargetShield : TargetBase
         print(spawnIndex);
     }
     
+    /*
+     * Generates a random number within a certain value range,
+     * excluding a specified number
+     */
     public int RandomExcept(int min, int max, int except)
     {
         int random = Random.Range(min, max);
@@ -43,19 +47,24 @@ public class TargetShield : TargetBase
     {
         while (true)
         {
+            // The target of the Shield Target's shield ability
             int guardTarget = 0;
+
+            // Chooses a random target to shield from the list,
             if (spawner != null && spawner.positions.Count > 1)
             {
                 Debug.Log("Count: " + spawner.positions.Count);
                 guardTarget = Random.Range(0, spawner.positions.Count);
             }
-            //else if(shielding != )
+            // Pauses for three seconds if it's the first spawned target
+            // or not associated with a target spawner
             else
             {
                 yield return new WaitForSeconds(3f);
                 print("We ON!");
             }
-            //print(Random.Range(0, 0));
+            // If the chosen target is this Shield Target, 
+            // then choose another position
             if (guardTarget == spawnIndex)
             {
                 while (guardTarget == spawnIndex)

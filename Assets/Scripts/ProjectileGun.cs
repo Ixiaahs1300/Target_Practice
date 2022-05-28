@@ -8,19 +8,43 @@ public class ProjectileGun : MonoBehaviour
     public GameObject bullet;
     public GameObject crosshair;
 
-    public float shootForce, upwardForce;
+    [Header("Projectile Forces")]
+    // "Forward" force for projectile
+    [SerializeField]
+    private float shootForce;
+    // Upward force for projectile. Mainly meant for items like grenades
+    [SerializeField]
+    private float upwardForce;
 
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
-    public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    [Header("Bullet Attributes")]
+    [SerializeField]
+    private float timeBetweenShooting;
+    // Bullet spread
+    [SerializeField]
+    private float spread;
+    private float reloadTime;
+    private float timeBetweenShots;
+    [SerializeField]
+    private int magazineSize;
+    [SerializeField]
+    private int bulletsPerTap;
+    // Turns gun from semi-automatic to automatic
+    [SerializeField]
+    private bool allowButtonHold;
+    private int bulletsLeft;
+    private int bulletsShot;
 
-    bool shooting, readyToShoot, reloading;
+    private bool shooting;
+    private bool readyToShoot;
+    private bool reloading;
 
+    [Header("Camera/Focal Point")]
     public Camera fpsCam;
+    // Point from which the bullet leaves the gun
     public Transform attackPoint;
 
-    public bool allowInvoke = true;
+    // Allows for a reload to be performed
+    private bool allowInvoke = true;
 
     [Header("Keybindings")]
     [SerializeField] KeyCode shootKey = KeyCode.Mouse0;
@@ -38,16 +62,18 @@ public class ProjectileGun : MonoBehaviour
 
     private void MyInput()
     {
+        // Says the player is shooting for the entire time they hold down the shoot key
         if (allowButtonHold)
         {
             shooting = Input.GetKey(shootKey);
         }
+        // Only allows shots to be taken per key press
         else
         {
             shooting = Input.GetKeyDown(shootKey);
         }
 
-        //Reload
+        // Reloads gun 
         if(Input.GetKeyDown(reloadKey) && bulletsLeft < magazineSize && !reloading)
         {
             Reload();
@@ -59,6 +85,7 @@ public class ProjectileGun : MonoBehaviour
             Reload();
         }
 
+        // Shoots the gun
         if(readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = 0;
@@ -71,13 +98,14 @@ public class ProjectileGun : MonoBehaviour
     {
         readyToShoot = false;
 
+        // Creates a ray pointing at the center of the screen 
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // middle of screen
         RaycastHit hit;
 
         Vector3 targetPoint;
         if(Physics.Raycast(ray, out hit))
         {
-            targetPoint = hit.point; //hit "something"
+            targetPoint = hit.point; //hit "something" in front of the player
         }
         else
         {
@@ -91,22 +119,10 @@ public class ProjectileGun : MonoBehaviour
         float y = Random.Range(-spread, spread);
 
         //Calculate new direction with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); // Just add spread to last direction
-
-        //GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
-        //What I've found. After restarting game and beginning shooting at different locations,
-        //I've seen that shooting is normal when shooting at the exact same spot. But when you 
-        //rotate and change directions is gets messed up. 
-        //maybe try slowing down bullets and looking at transforms
-
-        //Problem seems to occur after bullets are inactivated and then used again. Seems to have to do with the state of the 
-        //bullet that's being reused with by the OPM.  n
-
-        //Thinking it has to do with rotation, but maybe to do with forward vector. Use draw ray and slow down bullets?
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); 
         
         GameObject currentBullet = ObjectPoolingManager.Instance.GetBullet();
         currentBullet.transform.position = attackPoint.position;
-        //currentBullet.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         currentBullet.transform.forward = directionWithSpread.normalized;
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);

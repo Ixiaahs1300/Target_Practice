@@ -8,10 +8,15 @@ public class TargetBlink : TargetBase
     [SerializeField] Material red;
     [SerializeField] Material blue;
     Material currentMat;
+    // How long it takes for the target type to switch
     [SerializeField] float switchTime = 3f;
+    // How often target type should switch after initial switch
     [SerializeField] float repeatTime = 3f;
+    
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform player;
+    
+    // Force with which projectile is shot at player
     [SerializeField] private float shootForce = 60f;
 
     void Awake()
@@ -29,6 +34,8 @@ public class TargetBlink : TargetBase
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        
+        // Allows target to be destroyed by its own deflected projectile
         if (collision.transform.CompareTag("Projectile"))
         {
             Destroy(gameObject);
@@ -48,6 +55,7 @@ public class TargetBlink : TargetBase
             mr.material = blue;
             currentMat = blue;
 
+            // Spawns projectile in front of target and shoots it towards player
             GameObject orb = Instantiate(projectile);
             orb.transform.position = transform.position + transform.forward;
             orb.transform.LookAt(player);

@@ -8,6 +8,7 @@ public class TargetProjectile : TargetBase
     [SerializeField] Transform player;
     [SerializeField] private float shootForce;
     [SerializeField] private float timeBetweenShots;
+    // Focus of target's fire
     [SerializeField] private Transform attackPoint;
 
     private void Awake()
@@ -17,18 +18,23 @@ public class TargetProjectile : TargetBase
 
     private void Start()
     {
-        StartCoroutine(ShootPlayer()); ;
+        StartCoroutine(ShootPlayer()); 
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        
+        //Allows target to be destroyed by its deflected projectile
         if(collision.transform.CompareTag("Projectile"))
         {
             Destroy(gameObject);
         }
     }
 
+    /*
+     * Continuously shoots at player
+    */
     IEnumerator ShootPlayer()
     {
         while (true) 

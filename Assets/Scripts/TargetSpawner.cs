@@ -14,6 +14,7 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] private GameObject targetShield;
     [SerializeField] private GameObject targetShield_v2;
     [SerializeField] private GameObject targetPursue;
+    // Shield type chosen by randomizer
     private GameObject chosenType;
 
     [Header("Positioning")]
@@ -62,6 +63,7 @@ public class TargetSpawner : MonoBehaviour
     private IEnumerator InstantiateRandomObjects()
     {
         var target = Instantiate(RollTarget(), randomPosition, Quaternion.Euler(0f, 0f, 90f));
+        //if(target.)
         target.transform.SetParent(transform);
         target.GetComponent<TargetBase>().spawnIndex = positions.Count + 1;
         target.GetComponent<TargetBase>().spawner = this;

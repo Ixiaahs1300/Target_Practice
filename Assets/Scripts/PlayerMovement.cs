@@ -55,13 +55,15 @@ public class PlayerMovement : MonoBehaviour
 
     void ControlSpeed()
     {
+        // Smoothly transitions player into sprint
         if(Input.GetKey(sprintKey) && isGrounded)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFov, sprintFovTime * Time.deltaTime);
             isSprinting = true;
         }
-        else if(!Input.GetKey(sprintKey) && isGrounded) //maybe has to do with wallrun, what happens when the player is in the air / isn't grounded, is the sprint bool properly updated?
+        // Smoothly transitions player to a normal walkspeed
+        else if (!Input.GetKey(sprintKey) && isGrounded) 
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
@@ -72,8 +74,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnSlope()
     {
+        // Shoots raycast directly at player's "feet", to see if they're touching something
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
         {
+            // Checks to see if the ground underneath the player is "level"/ not a slope
+            // by checking the direction of it's normal vector, aka the vector perpendicular to
+            // its surface
             if(slopeHit.normal != Vector3.up)
             {
                 return true;
@@ -87,14 +93,14 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Stops player from being rotated by objects colliding with it
         rb.freezeRotation = true;
     }
 
     private void Update()
     {
-        //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2f + 0.1f);
+        // Uses the collision data of a sphere at the bottom of the player to see if they're on solid ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        //print("IsGrounded: " + isGrounded);
         
         MyInput();
         ControlDrag();
@@ -102,25 +108,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
-            //Jump
             Jump();
         }
 
+        // The "direction" the player must go to move up a slope
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
 
     void Jump()
     {
+        // Resets velocity in the "up" direction to avoid complications
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        // Adds force in the "up" direction
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     void ControlDrag()
     {
+        // Adjusts drag force to be for ground
         if(isGrounded)
         {
             rb.drag = groundDrag;
         }
+        // adjusts drag force to be for air
         else
         {
             rb.drag = airDrag;
@@ -131,9 +141,14 @@ public class PlayerMovement : MonoBehaviour
 
     void MyInput()
     {
+        // Detects whether the player has pressed movement keys.
+        // Values can range between 0 and 1, but will be either 0
+        // or 1 since keyboard doesn't allow for "slight" input
+        // like analog sticks on controllers
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
 
+        // Creates movement vector based upon player input
         moveDirection = orientation.transform.forward * verticalMovement + orientation.transform.right * horizontalMovement;
     }
 
@@ -156,7 +171,6 @@ public class PlayerMovement : MonoBehaviour
             rb.useGravity = false; //Stops sliding
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
-        //else if ((!isGrounded && wallRun.wallLeft) || (!isGrounded && wallRun.wallRight))
         // Player is wall running
         else if (!isGrounded && wallRun.isWallAdjacent())
         {
