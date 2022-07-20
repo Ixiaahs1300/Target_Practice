@@ -65,6 +65,13 @@ public class WallRun : MonoBehaviour
 
     [SerializeField] LedgeDetection ld;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rightGunPosition = playerGun.transform.position;
+        leftGunPosition = new Vector3(-0.52f, rightGunPosition.y, rightGunPosition.z);
+    }
+
     void CheckWall()
     {
         // Cast ray to left and right of player to check if they are touching a wayy
@@ -153,13 +160,6 @@ public class WallRun : MonoBehaviour
         isWallRunning = false;
         // Resets screen tilt
         tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
-    }
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rightGunPosition = playerGun.transform.position;
-        leftGunPosition = new Vector3(-0.52f, rightGunPosition.y, rightGunPosition.z);
     }
 
     //Need to check if moving forward

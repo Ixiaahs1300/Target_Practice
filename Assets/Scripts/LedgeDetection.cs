@@ -60,6 +60,7 @@ public class LedgeDetection : MonoBehaviour
 
     void Update()
     {
+        Debug.DrawRay(detectVertical.position, -orientation.up);
         // Checks if character is now hanging
         if (!isHanging)
         {

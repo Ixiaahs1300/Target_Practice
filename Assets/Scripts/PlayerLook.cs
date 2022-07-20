@@ -51,6 +51,7 @@ public class PlayerLook : MonoBehaviour
     {
         // Grabs x and y axis values from mouse movement
         mouseX = Input.GetAxisRaw("Mouse X");
+        // 0, -1, 1
         mouseY = Input.GetAxisRaw("Mouse Y");
         
         // Adds magnitude to values

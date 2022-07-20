@@ -11,11 +11,13 @@ public class TargetProjectile : TargetBase
     // Focus of target's fire
     [SerializeField] private Transform attackPoint;
 
+    // Called when the object is initialized
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform; 
     }
 
+    // Called when the object is made "active"
     private void Start()
     {
         StartCoroutine(ShootPlayer()); 
