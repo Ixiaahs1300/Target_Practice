@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     public float jumpForce = 15f;
+    public float coyoteTime = 0.2f;
+    public float coyoteTimeCounter;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     RaycastHit slopeHit;
     public bool isSprinting = false;
+
+    private bool noInput = false;
 
     void ControlSpeed()
     {
@@ -106,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
         ControlDrag();
         ControlSpeed();
 
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
-        {
+        if (Input.GetKeyDown(jumpKey) && coyoteTimeCounter > 0f)
+        { 
             Jump();
         }
 
@@ -121,6 +125,9 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         // Adds force in the "up" direction
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        coyoteTimeCounter = 0f;
+        print("We Jumpin");
+
     }
 
     void ControlDrag()
@@ -148,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
 
+        if(horizontalMovement == 0 && verticalMovement == 0)
+        {
+            noInput = true;
+        }
+
         // Creates movement vector based upon player input
         moveDirection = orientation.transform.forward * verticalMovement + orientation.transform.right * horizontalMovement;
     }
@@ -163,25 +175,40 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && !OnSlope())
         {
             rb.useGravity = true;
+            coyoteTimeCounter = coyoteTime;
+
+
+            if (noInput)
+            {
+                rb.AddForce(-rb.velocity, ForceMode.VelocityChange);
+                noInput = false;
+            }
+
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
         // Player is moving up slope
         else if (isGrounded && OnSlope())
         {
             rb.useGravity = false; //Stops sliding
+            coyoteTimeCounter = coyoteTime;
+
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
         // Player is wall running
         else if (!isGrounded && wallRun.isWallAdjacent())
         {
             // get rid of vector in up direction
-            rb.AddForce(moveDirection.normalized * (moveSpeed / 2) * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * moveSpeed * wallRun.getWallRunSpeed() * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+            coyoteTimeCounter = 0f;
             print("Vector: " + moveDirection.normalized);
         }
         // If the player is jumping through the air
         else if (!isGrounded)
         {
             rb.useGravity = true;
+
+            coyoteTimeCounter -= Time.deltaTime; 
+
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
         }
         

@@ -37,6 +37,8 @@ public class WallRun : MonoBehaviour
     [SerializeField] private float wallRunGravity;
     // Force with which character jumps from wall
     [SerializeField] private float wallRunJumpForce;
+    // The speed at which the player runs along the wall
+    [SerializeField] private float wallRunSpeed;
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
@@ -70,6 +72,11 @@ public class WallRun : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rightGunPosition = playerGun.transform.position;
         leftGunPosition = new Vector3(-0.52f, rightGunPosition.y, rightGunPosition.z);
+    }
+
+    public float getWallRunSpeed()
+    {
+        return wallRunSpeed;
     }
 
     void CheckWall()
